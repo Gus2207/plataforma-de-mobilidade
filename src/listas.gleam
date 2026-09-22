@@ -1,3 +1,5 @@
+import tipos
+
 /// COLOCAR AQUI AS FUNÇÕES QUE MANUPULAM AS LISTAS DIRETAMENTE (F3 até F7)
 /// Verifica quantas viagens foram realizadas em uma *linha* especifica
 pub fn percorre(linha: Linha) -> Int {
@@ -11,6 +13,9 @@ pub fn percorre(linha: Linha) -> Int {
 pub fn viagens_pontuais(linha: Linha) -> Linha{
   case linha {
     Linha(_, []) -> Linha[linha.nome, []]
-    Linha(_, [primeiro, ..resto]) ->  case
+    Linha(_, [primeiro, ..resto]) ->  case primeiro.situacao == Atrasada {
+      True -> viagens_pontuais(Linha(linha.nome, [resto]))
+      False -> Linha(linha.nome, [primeiro, ..viagens_pontuais(Linha.nome, [resto]]))
+    }
   }
 }
