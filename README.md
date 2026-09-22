@@ -58,3 +58,16 @@ regularidade por região.
  - [ ] **F10 – Relatório textual**
    * **O que fazer:** Produzir uma `String` juntando textos e pelo menos três resultados de cálculos feitos pelas funções anteriores.
    * **Sugestão Tema 9:** Retornar uma string formatada: *"Relatório da Cidade: O sistema processou um total de [X] passageiros. A viagem com pior atraso foi a de ID [Y]. Detectamos [Z] viagens críticas hoje."* (Use `int.to_string` para converter os números para texto).
+
+ ## CheckList final: 
+
+- [x] **Escolhemos um dos 10 temas e informamos a escolha conforme solicitado.**
+- [ ] **Implementamos as funcionalidades F1–F10.**
+- [x] **Criamos pelo menos 2 tipos soma e 1 tipo autorreferente.**
+- [ ] **Implementamos pelo menos 5 funções recursivas, sendo pelo menos 3 estruturais.**
+- [ ] **Não substituímos as recursões obrigatórias por funções de alta ordem.**
+- [x] **Incluímos pelo menos 3 validações específicas do tema.**
+- [ ] **Testamos casos típicos, limites e casos de ausência/erro.**
+- [ ] **Documentamos a função que utiliza um plano de solução.**
+- [ ] **O README permite identificar claramente onde cada requisito foi implementado.**
+- [ ] **Todos os integrantes conseguem explicar o modelo de dados e as principais funções.**
