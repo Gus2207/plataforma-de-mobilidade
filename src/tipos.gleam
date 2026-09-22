@@ -1,10 +1,3 @@
-//import gleam/float
-//import gleam/int
-//import gleam/string
-// import sgleam/check
-
-// import validacao
-
 /// AQUI DEVEM SER COLOCADOS APENAS OS TIPOS DE DADOS [LEMBRAR DE APAGAR ESSAS MENSAGENS DEPOIS]
 /// Representa a situação de uma viagem
 pub type Situacao {
@@ -25,17 +18,17 @@ pub type RegiaoCidade {
 
 /// Representa um tipo de transporte, onde todos eles possuem uma quantidade máxima de passageiros
 pub type Transporte {
-  Van(max_passageiros: Int)
-  MicroOnibus(max_passageiros: Int)
-  Onibus(max_passageiros: Int)
+  Van
+  MicroOnibus
+  Onibus
 }
 
 /// Retorna a quantidade máxima de passageiros de um *trasporte*
 pub fn capacidade_maxima(transporte: Transporte) -> Int {
   case transporte {
-    Van(_) -> 20
-    MicroOnibus(_) -> 30
-    Onibus(_) -> 45
+    Van -> 20
+    MicroOnibus -> 30
+    Onibus -> 45
   }
 }
 
@@ -60,18 +53,14 @@ pub opaque type Viagem {
 pub fn classifica_tempo(
   tempo_previsto: Int,
   tempo_realizado: Int,
-) -> Result(Situacao, Nil) {
-  case tempo_previsto > 0 && tempo_realizado > 0 {
-    True ->
-      case tempo_previsto < tempo_realizado {
-        True -> Ok(Adiantada)
-        False ->
-          case tempo_previsto == tempo_realizado {
-            True -> Ok(Pontual)
-            False -> Ok(Atrasada)
-          }
+) -> Situacao{
+  case tempo_previsto < tempo_realizado {
+    True -> Adiantada
+    False ->
+      case tempo_previsto == tempo_realizado {
+        True -> Pontual
+        False -> Atrasada
       }
-    False -> Error(Nil)
   }
 }
 
@@ -83,10 +72,11 @@ pub fn cria_viagem(
   tempo_previsto: Int,
   tempo_realizado: Int,
 ) -> Result(Viagem, Nil) {
-  let assert Ok(situacao) = classifica_tempo(tempo_previsto, tempo_realizado)
-  case id > 0 && tempo_previsto > 0 && tempo_realizado > 0 {
-    True ->
+  case id > 0 && tempo_previsto > 0 && tempo_realizado > 0{
+    True -> {
+      let situacao = classifica_tempo(tempo_previsto, tempo_realizado)
       Ok(Viagem(id, transporte, tempo_previsto, tempo_realizado, situacao))
+    }
     False -> Error(Nil)
   }
 }
@@ -123,18 +113,10 @@ pub type Linha {
 
 /// Representa uma região com uma listagem das linhas de transporte
 pub type Regiao {
-  Regiao(regiao: RegiaoCidade, linhas: List(Linha))
+  Regiao(regiao: RegiaoCidade, sub_regioes: List(RegiaoCidade), linhas: List(Linha))
 }
 
 /// Representa uma cidade com um nome próprio e uma listagem das regiões que existem nessa cidade
 pub type Cidade {
   Cidade(nome: String, regioes: List(Regiao))
-}
-
-/// Faz o calculo do tempo médio realizado de viagens de uma linha inteira
-pub fn percorre(linha: Linha) -> Int {
-  case linha {
-    Linha(_, []) -> 0
-    Linha(_, [_, ..resto]) -> 1 + percorre(Linha(linha.nome, resto))
-  }
 }
