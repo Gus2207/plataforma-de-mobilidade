@@ -10,7 +10,7 @@ pub type Situacao {
   Adiantada,
   Pontual,
   Atrasada,
-  Critica
+  Cancelado
 }
 
 /// Representa regiões de uma cidade
