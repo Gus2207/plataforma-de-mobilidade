@@ -20,11 +20,11 @@ regularidade por região.
    * **Foi feito** Verificar se o id, tempo_previsto e tempo_realizado são maiores que 0. Isso em um tipo Opaque
    * [] **Se quiser adicionar** Uma validação que não permite adicionar viagens com id já existentes em uma linhas
  
- - [ ] **F2 – Classificação**
+ - [x] **F2 – Classificação**
    * **O que fazer:** Criar uma função que recebe um registro válido e, usando `case` (pattern matching), classifica esse registro em pelo menos três categorias (um Tipo Soma que você deve criar).
    * **Sugestão Tema 9:** Criar um tipo `NivelAtraso` (`NoPrazo`, `AtrasoToleravel`, `AtrasoGrave`). A função calcula `tempo_realizado - tempo_previsto` e usa o `case` para retornar a categoria certa.
  
- - [ ] **F3 – Agregação sobre lista**
+ - [x] **F3 – Agregação sobre lista**
    * **O que fazer:** Usar *recursão estrutural manual* para percorrer uma lista de registros e calcular um valor único. **Proibido usar map/reduce/fold/funções prontas**.
    * **Sugestão Tema 9:** Calcular o **total de passageiros** transportados em uma lista de viagens. (Caso base: lista vazia = 0; Caso recursivo: soma o primeiro com a chamada recursiva do resto).
  
