@@ -2,6 +2,7 @@ import sgleam/check
 import gleam/int
 import gleam/float
 import gleam/string
+import validacao
 
 /// AQUI DEVEM SER COLOCADOS APENAS OS TIPOS DE DADOS [LEMBRAR DE APAGAR ESSAS MENSAGENS DEPOIS]
 /// Representa a situação de uma viagem
@@ -44,8 +45,42 @@ pub fn capacidade_maxima(transporte: Transporte) -> Int {
 /// - tempo_previsto e tempo_realizado representam minutos, que uma viagem deve durar e quanto ela realmente durou,
 /// respectivamente. Ambos devem ser inteiros maiores que 0
 /// - situacação é representado pelo tipo enumerado *Situacao*
-pub type Viagem {
+pub opaque type Viagem {
   Viagem(id: Int, transporte: Transporte, tempo_previsto: Int, tempo_realizado: Int, situacao: Situacao)
+}
+
+/// Retorna ok(Viagem) se *id*, *tempo_previso* e *tempo_realizado* forem maiores que 0. Error(Nil) caso contrário.
+/// Quanto aos paramentros *transporte*, *situação* não ha validações a serem realizadas.
+pub fn cria_viagem(id: Int, transporte: Transporte, tempo_previsto: Int, tempo_realizado: Int, situacao: Situacao) -> Result(Viagem, Nil){
+  case id > 0 && tempo_previsto > 0 && tempo_realizado > 0 {
+    True -> Ok(Viagem(id, transporte, tempo_previsto, tempo_realizado, situacao))
+    False -> Error(Nil)
+  }
+}
+
+/// Devolve o valor do id de uma *viagem*
+pub fn mostra_id(viagem: Viagem){
+  viagem.id
+}
+
+/// Devolve o valor do transporte de uma *viagem*
+pub fn mostra_id(viagem: Viagem){
+  viagem.transporte
+}
+
+/// Devolve o valor do tempo_previsto de uma *viagem*
+pub fn mostra_id(viagem: Viagem){
+  viagem.tempo_previsto
+}
+
+/// Devolve o valor do tempo_realizado de uma *viagem*
+pub fn mostra_id(viagem: Viagem){
+  viagem.tempo_realizado
+}
+
+/// Devolve o valor da situacao de uma *viagem*
+pub fn mostra_id(viagem: Viagem){
+  viagem.situacao
 }
 
 /// Representa uma linha, que possui um nome especifico e uma listagem das viagens que foram realizadas nessa linha

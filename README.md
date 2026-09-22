@@ -15,9 +15,10 @@ regularidade por região.
 
  ### Checklist do que deve ser feito
  
- - [ ] **F1 – Criação e Validação**
+ - [x] **F1 – Criação e Validação**
    * **O que fazer:** Criar uma função que recebe os dados "crus" para montar uma `Viagem`. Ela deve verificar pelo menos 3 regras de negócio e retornar um tipo `Result` (Ok com a Viagem, ou Error se algo estiver errado).
-   * **Sugestão Tema 9:** Validar se (1) passageiros é >= 0, (2) tempo_previsto é > 0, e (3) tempo_realizado é >= 0.
+   * **Foi feito** Verificar se o id, tempo_previsto e tempo_realizado são maiores que 0. Isso em um tipo Opaque
+   * [] **Se quiser adicionar** Uma validação que não permite adicionar viagens com id já existentes em uma linhas
  
  - [ ] **F2 – Classificação**
    * **O que fazer:** Criar uma função que recebe um registro válido e, usando `case` (pattern matching), classifica esse registro em pelo menos três categorias (um Tipo Soma que você deve criar).
