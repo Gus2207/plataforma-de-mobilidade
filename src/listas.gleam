@@ -7,4 +7,10 @@ pub fn percorre(linha: Linha) -> Int {
   }
 }
 
-/// Remove de uma lista
+/// Remove de uma lista de Linhas *linha* todas as viagens que estão atrasadas
+pub fn viagens_pontuais(linha: Linha) -> Linha{
+  case linha {
+    Linha(_, []) -> Linha[linha.nome, []]
+    Linha(_, [primeiro, ..resto]) ->  case
+  }
+}
