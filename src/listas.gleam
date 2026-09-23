@@ -38,7 +38,7 @@ pub fn busca_viagem_id(linha: Linha, id: Int) -> Result(Viagem, Nil) {
 }
 
 /// Devolve uma lista com apenas o tempo previsto de cada viagem de uma *linha*
-pub fn previsoes(linha: Linha) -> List[Int] {
+pub fn previsoes(linha: Linha) -> List(Int) {
   case linha {
     Linha(_, []) -> []
     Linha(_, [primeiro, ..resto]) -> [mostra_previsao(primeiro), ..previsoes(Linha(linha.nome, resto))]
