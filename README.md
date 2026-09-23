@@ -22,29 +22,29 @@ regularidade por região.
  
  - [x] **F2 – Classificação**
    * **O que fazer:** Criar uma função que recebe um registro válido e, usando `case` (pattern matching), classifica esse registro em pelo menos três categorias (um Tipo Soma que você deve criar).
-   * **Sugestão Tema 9:** Criar um tipo `NivelAtraso` (`NoPrazo`, `AtrasoToleravel`, `AtrasoGrave`). A função calcula `tempo_realizado - tempo_previsto` e usa o `case` para retornar a categoria certa.
+   * **Foi feito** Classifica uma viagem em Adiatada, pontual ou Atrasada.
  
  - [x] **F3 – Agregação sobre lista**
    * **O que fazer:** Usar *recursão estrutural manual* para percorrer uma lista de registros e calcular um valor único. **Proibido usar map/reduce/fold/funções prontas**.
-   * **Sugestão Tema 9:** Calcular o **total de passageiros** transportados em uma lista de viagens. (Caso base: lista vazia = 0; Caso recursivo: soma o primeiro com a chamada recursiva do resto).
+   * **Foi feito** Conta quantas viagens foram realizadas em uma determinada Linha
  
- - [ ] **F4 – Filtragem recursiva**
+ - [x] **F4 – Filtragem recursiva**
    * **O que fazer:** Receber uma lista e retornar uma *nova lista* apenas com os elementos que passam em um teste lógico. *Recursão manual.*
-   * **Sugestão Tema 9:** Filtrar a lista para devolver **apenas viagens feitas por Ônibus** (descartando Vans e Micro-ônibus), ou apenas viagens com situação "Crítica".
+   * **Foi feito** Cria uma lista sem as viagens atrasadas
  
- - [ ] **F5 – Transformação recursiva**
+ - [x] **F5 – Transformação recursiva**
    * **O que fazer:** Receber uma lista e retornar uma *nova lista* (modificada ou extraindo um dado de cada elemento), preservando a imutabilidade. *Recursão manual.*
-   * **Sugestão Tema 9:** Receber uma `List(Viagem)` e devolver uma `List(Int)` contendo apenas a **quantidade de minutos de atraso** de cada viagem daquela lista.
+   * **Foi feito** Cria a partir de uma lista de viagens uma lista com o tempo realizado das viagens List[Viagem] -> List[Int]
  
- - [ ] **F6 – Busca**
+ - [x] **F6 – Busca**
    * **O que fazer:** Percorrer a lista recursivamente procurando um elemento específico. Deve usar o tipo `Option` (`Some(elemento)` se achar, `None` se não achar).
    * **Sugestão Tema 9:** Buscar uma **viagem específica pelo número do `id`**.
  
- - [ ] **F7 – Maior ou menor elemento**
+ - [x] **F7 – Maior ou menor elemento**
    * **O que fazer:** Percorrer a lista recursivamente para achar o elemento de maior ou menor valor segundo algum critério.
    * **Sugestão Tema 9:** Encontrar a **viagem que teve o pior tempo de atraso** (o maior valor de atraso) ou a **viagem com o maior número de passageiros**.
  
- - [ ] **F8 – Análise combinada**
+ - [x] **F8 – Análise combinada**
    * **O que fazer:** Resolver um problema mais complexo que exija compor pelo menos duas etapas (usar funções auxiliares).
    * **Sugestão Tema 9:** Calcular a **média de passageiros apenas dos Ônibus**. 
      * *Plano:* (1) Função que filtra só os ônibus. (2) Função que soma os passageiros dessa lista filtrada. (3) Função que conta o tamanho da lista. (4) Função principal que divide a soma pela quantidade.

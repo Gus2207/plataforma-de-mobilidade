@@ -55,11 +55,11 @@ pub fn classifica_tempo(
   tempo_realizado: Int,
 ) -> Situacao{
   case tempo_previsto < tempo_realizado {
-    True -> Adiantada
+    True -> Atrasada
     False ->
       case tempo_previsto == tempo_realizado {
         True -> Pontual
-        False -> Atrasada
+        False -> Adiantada
       }
   }
 }
