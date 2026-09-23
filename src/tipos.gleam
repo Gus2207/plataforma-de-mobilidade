@@ -124,10 +124,4 @@ pub type Cidade {
   Cidade(nome: String, regioes: List(Regiao))
 }
 
-pub fn calcula_viagens(linha: Linha) -> Int {
-  case linha.viagens {
-    [] -> 0
-    [_, ..resto] -> 1 + calcula_viagens(Linha(linha.nome, resto))
-  }
-}
 
