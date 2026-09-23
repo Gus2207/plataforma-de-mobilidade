@@ -46,8 +46,8 @@ regularidade por região.
  
  - [x] **F8 – Análise combinada**
    * **O que fazer:** Resolver um problema mais complexo que exija compor pelo menos duas etapas (usar funções auxiliares).
-   * **Sugestão Tema 9:** Calcular a **média de passageiros apenas dos Ônibus**. 
-     * *Plano:* (1) Função que filtra só os ônibus. (2) Função que soma os passageiros dessa lista filtrada. (3) Função que conta o tamanho da lista. (4) Função principal que divide a soma pela quantidade.
+   * **Sugestão Tema 9:** Calcular a média do tempo realizado das viagens de um linha.
+     * **O que foi feito** (1) Calcular quantas viagens uma Linha possui (2) Realizar a soma do tempo total de viagens realizadas em uma linha (3) calcular a média realizando soma/quantidade
  
  - [ ] **F9 – Processamento hierárquico**
    * **O que fazer:** Implementar **duas funções recursivas** que processem a sua estrutura em árvore (Cidade -> Região -> Linha -> Viagens).

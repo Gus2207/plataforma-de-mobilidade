@@ -23,3 +23,5 @@ pub fn media_tempo(linha: Linha) -> Float {
   let soma_tempo_realizado = int.to_float(soma_tempo_realizado(linha))
   soma_tempo_realizado / qtd_viagens
 }
+
+/// Verifica qual o meio de transporte mais
