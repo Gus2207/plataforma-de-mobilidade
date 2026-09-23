@@ -1,4 +1,12 @@
 /// COLOCAR AQUI AS FUNÇÕES QUE MANUPULAM AS LISTAS DIRETAMENTE (F3 até F7)
+
+/// Calcula a quantidade de *viagens* que uma *linha* fez
+pub fn calcula_viagens(linha: Linha) -> Int {
+  case linha.viagens {
+    [] -> 0
+    [_, ..resto] -> 1 + calcula_viagens(Linha(linha.nome, resto))
+  }
+}
 /// Busca recursivamente uma viagem específica de uma *linha* a partir de seu *id*
 pub fn busca_viagem_id(linha: Linha, id: Int) -> Result(Viagem, Nil) {
   case linha.viagens {
