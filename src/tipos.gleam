@@ -1,3 +1,5 @@
+/// COLOCAR AQUI AS FUNÇÕES QUE MANUPULAM AS LISTAS DIRETAMENTE (F3 até F7)
+/// Verifica quantas viagens foram realizadas em uma *linha* especifica
 /// AQUI DEVEM SER COLOCADOS APENAS OS TIPOS DE DADOS [LEMBRAR DE APAGAR ESSAS MENSAGENS DEPOIS]
 /// Representa a situação de uma viagem
 pub type Situacao {
@@ -50,10 +52,7 @@ pub opaque type Viagem {
 
 /// Recebe a quantidade de tempo de uma viagem e a classifica em *Adiantado*,
 /// *Pontual*, *Atrasado*, *Cancelado*
-pub fn classifica_tempo(
-  tempo_previsto: Int,
-  tempo_realizado: Int,
-) -> Situacao{
+pub fn classifica_tempo(tempo_previsto: Int, tempo_realizado: Int) -> Situacao {
   case tempo_previsto < tempo_realizado {
     True -> Adiantada
     False ->
@@ -72,7 +71,7 @@ pub fn cria_viagem(
   tempo_previsto: Int,
   tempo_realizado: Int,
 ) -> Result(Viagem, Nil) {
-  case id > 0 && tempo_previsto > 0 && tempo_realizado > 0{
+  case id > 0 && tempo_previsto > 0 && tempo_realizado > 0 {
     True -> {
       let situacao = classifica_tempo(tempo_previsto, tempo_realizado)
       Ok(Viagem(id, transporte, tempo_previsto, tempo_realizado, situacao))
@@ -113,10 +112,22 @@ pub type Linha {
 
 /// Representa uma região com uma listagem das linhas de transporte
 pub type Regiao {
-  Regiao(regiao: RegiaoCidade, sub_regioes: List(RegiaoCidade), linhas: List(Linha))
+  Regiao(
+    regiao: RegiaoCidade,
+    sub_regioes: List(RegiaoCidade),
+    linhas: List(Linha),
+  )
 }
 
 /// Representa uma cidade com um nome próprio e uma listagem das regiões que existem nessa cidade
 pub type Cidade {
   Cidade(nome: String, regioes: List(Regiao))
 }
+
+pub fn calcula_viagens(linha: Linha) -> Int {
+  case linha.viagens {
+    [] -> 0
+    [_, ..resto] -> 1 + calcula_viagens(Linha(linha.nome, resto))
+  }
+}
+
