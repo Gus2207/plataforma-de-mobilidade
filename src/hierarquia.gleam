@@ -1,108 +1,102 @@
 import tipos.{
+  type Cidade,
   type Linha,
   type Regiao,
-  type Cidade,
-  Cidade,
-  Regiao,
+  type Viagem,
   Onibus,
-  Linha,
   mostra_transporte,
 }
 
-/// AQUI EXCLUSIVO PARA ABRIGAR A MANUPULAÇÃO DA HIERARQUIA F9
-
-/// Funcao recursiva que processa de forma hierarquica todas as linhas da cidade
-/// que são de onibus, devolvendo no fim a quantidade de viagens de onibus
+/// Função inicial de uma hierarquia que calcula a quantidade total de viagens de onibus de uma *cidade*
 pub fn busca_viagens_onibus(cidade: Cidade) -> Int {
-  case cidade.regioes {
+  percorre_regioes(cidade.regioes)
+}
+
+/// Funcao recursiva que percorre uma lista de Regiao *regioes* que podem ser regiões de uma cidade ou subregioes de uma regiao
+/// e soma a quantidade de viagens realizadas de onibus na região utilizando a função *calcula_regiao*.
+pub fn percorre_regioes(regioes: List(Regiao)) -> Int {
+  case regioes {
     [] -> 0
     [primeiro, ..resto] -> {
-      let resultado = percorre_regiao(primeiro)
-      resultado + busca_viagens_onibus(Cidade(cidade.nome, resto))
+      calcula_regiao(primeiro) + percorre_regioes(resto)
     }
   }
 }
 
-/// Pega a hierarquia mais alta (*Cidade*) e percorre suas regioes, além de
-// fazer a chamada da funcao que percorre as linhas de uma regiao e a chamada
-
-///da funcao que percorre as subregioes
-pub fn percorre_regiao(regiao: Regiao) -> Int {
-  case regiao.linhas {
-    [] -> percorre_sub_regioes(regiao.sub_regioes)
-    [primeiro, ..resto] -> {
-      let resultado = percorre_linhas(primeiro)
-      resultado
-      + percorre_regiao(Regiao(regiao.nome, regiao.sub_regioes, resto))
-    }
-  }
+/// Soma a quantidade de viagens realizadas de onibus em uma *regiao* com a quantidade de viagens realizadas de onibus em suas subregioes,
+/// utilizando as funções *percorre_lista_linhas* e *percorre_regioes*
+pub fn calcula_regiao(regiao: Regiao) -> Int {
+  percorre_lista_linhas(regiao.linhas) + percorre_regioes(regiao.sub_regioes)
 }
 
-/// funcao recursiva que percorre uma lista de regioes (sub regioes de uma
-///regiao) e chama a percorre_regiao para percorrer a regiao dessa lista
-pub fn percorre_sub_regioes(subregioes: List(Regiao)) -> Int {
-  case subregioes {
-    [] -> percorre_sub_regioes(resto)
-    [primeiro, ..resto] -> {
-      let resultado = percorre_regiao(primeiro)
-      resultado + percorre_regiao(resto)
-    }
-  }
-}
-
-/// funcao recursiva que recebe uma *linha*de uma região e verifica quantos
-///transportes dessa linha são onibus
-pub fn percorre_linhas(linhas: Linha) -> Int {
-  case linhas.viagens {
+/// Calcula a quantidade de viagens de onibus realizadas em um List de Linha *linha*, utilizando a função
+/// *percorre_viagens_onibus*
+pub fn percorre_lista_linhas(linhas: List(Linha)) -> Int {
+  case linhas {
     [] -> 0
     [primeiro, ..resto] -> {
-      let transporte = mostra_transporte(primeiro)
-
-      case transporte == Onibus {
-        True -> 1 + percorre_linhas(Linha(linhas.nome, resto))
-        False -> percorre_linhas(Linha(linhas.nome, resto))
-      }
+      percorre_viagens_onibus(primeiro.viagens) + percorre_lista_linhas(resto)
     }
   }
 }
+
+/// Calcula a quantidade de viagens realizadas de onibus em um List de Viagem *viagens*
+pub fn percorre_viagens_onibus(viagens: List(Viagem)) -> Int {
+  case viagens {
+    [] -> 0
+    [primeiro, ..resto] -> case mostra_transporte(primeiro) == Onibus {
+      True -> 1 + percorre_viagens_onibus(resto)
+      False -> percorre_viagens_onibus(resto)
+    }
+  }
+}
+
+// =============================================================================
+// 2. TOTAL ABSOLUTO DE VIAGENS (TODOS OS TRANSPORTES)
+// =============================================================================
 
 /// Pega a hierarquia mais alta (*Cidade*) e percorre suas regioes, além de
 /// fazer a chamada da funcao que percorre as linhas de uma regiao e a chamada
 ///da funcao que percorre as subregioes
-pub fn percorre_regiao_totais(regiao: Regiao) -> Int {
-  case regiao.linhas {
-    [] -> percorre_sub_regioes_totais(regiao.sub_regioes)
-    [primeiro, ..resto] -> {
-      let resultado = percorre_linhas_totais(primeiro)
-      resultado
-      + percorre_regiao_totais(Regiao(
-        regiao.regiao,
-        regiao.sub_regioes,
-        resto,
-      ))
-    }
-  }
+pub fn busca_viagens_totais(cidade: Cidade) -> Int {
+  percorre_sub_regioes_totais(cidade.regioes)
 }
 
 /// funcao recursiva que percorre uma lista de regioes (sub regioes de uma
 ///regiao) e chama a percorre_regiao para percorrer a regiao dessa lista
 pub fn percorre_sub_regioes_totais(subregioes: List(Regiao)) -> Int {
   case subregioes {
-    [] -> percorre_sub_regioes_totais(resto)
+    [] -> 0
     [primeiro, ..resto] -> {
-      let resultado = percorre_regiao_totais(primeiro)
-      resultado + percorre_regiao_totais(resto)
+      percorre_regiao_totais(primeiro) + percorre_sub_regioes_totais(resto)
     }
   }
 }
 
-/// funcao recursiva que recebe uma *linha*de uma região e verifica quantos
-///viagens tem em uma cidade
-pub fn percorre_linhas_totais(linhas: Linha) -> Int {
-  case linhas.viagens {
+/// Recebe UMA Região: Soma as viagens totais das suas linhas + sub-regiões
+pub fn percorre_regiao_totais(regiao: Regiao) -> Int {
+  percorre_lista_linhas_totais(regiao.linhas) + percorre_sub_regioes_totais(regiao.sub_regioes)
+}
+
+/// Percorre a lista de linhas de uma região para o total de viagens
+pub fn percorre_lista_linhas_totais(linhas: List(Linha)) -> Int {
+  case linhas {
     [] -> 0
-    [_, ..resto] -> {
-      1 + percorre_linhas_totais(Linha(linhas.nome, resto))
+    [primeiro, ..resto] -> {
+      percorre_linhas_totais(primeiro) + percorre_lista_linhas_totais(resto)
     }
+  }
+}
+
+/// Recebe UMA Linha: Pega a lista de viagens dela e conta todas
+pub fn percorre_linhas_totais(linha: Linha) -> Int {
+  percorre_viagens_totais(linha.viagens)
+}
+
+/// Percorre a lista de viagens (List(Viagem)) contando todas
+pub fn percorre_viagens_totais(viagens: List(Viagem)) -> Int {
+  case viagens {
+    [] -> 0
+    [_, ..resto] -> 1 + percorre_viagens_totais(resto)
   }
 }
