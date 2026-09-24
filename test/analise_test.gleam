@@ -137,11 +137,13 @@ pub fn calcula_viagens(linha: Linha) -> Int {
 }
 
 /// Busca recursivamente uma viagem específica de uma *linha* a partir de seu *id*
-pub fn busca_viagem_id(linha: Linha, id: Int) -> Result(Viagem, Nil) {
+pub fn busca_viagem_id(linha: Linha, id: Int) -> Option(Viagem) {
   case linha.viagens {
-    [] -> Error(Nil)
-    [primeiro, ..] if primeiro.id == id -> Ok(primeiro)
-    [_, ..resto] -> busca_viagem_id(Linha(linha.nome, resto), id)
+    [] -> None
+    [primeiro, ..resto] -> case mostra_id(primeiro) == id {
+        True -> Some(primeiro)
+        False ->busca_viagem_id(Linha(linha.nome, resto), id)
+      }
   }
 }
 
