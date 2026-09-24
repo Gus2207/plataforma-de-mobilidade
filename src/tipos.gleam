@@ -125,7 +125,7 @@ pub type Linha {
 
 /// Representa uma região com uma listagem das linhas de transporte
 pub type Regiao {
-  Regiao(regiao: RegiaoCidade, sub_regioes: List(RegiaoCidade), linhas: List(Linha))
+  Regiao(regiao: RegiaoCidade, sub_regioes: List(Regiao), linhas: List(Linha))
 }
 
 /// Representa uma cidade com um nome próprio e uma listagem das regiões que existem nessa cidade
