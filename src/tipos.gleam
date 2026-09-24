@@ -1,4 +1,3 @@
-/// AQUI DEVEM SER COLOCADOS APENAS OS TIPOS DE DADOS [LEMBRAR DE APAGAR ESSAS MENSAGENS DEPOIS]
 /// Representa a situação de uma viagem
 pub type Situacao {
   Adiantada
@@ -6,17 +5,7 @@ pub type Situacao {
   Atrasada
 }
 
-/// Representa regiões de uma cidade
-pub type RegiaoCidade {
-  Centro
-  Periferia
-  ZonaResidencial
-  ZonaComercial
-  ZonaIndustrial
-  ZonaRural
-}
-
-/// Representa um tipo de transporte, onde todos eles possuem uma quantidade máxima de passageiros
+/// Representa um tipo de transporte
 pub type Transporte {
   Van
   MicroOnibus
@@ -24,11 +13,9 @@ pub type Transporte {
 }
 
 /// Representa uma viagem que foi realizada, onde:
-/// - id deve ser um inteiro maior que 0 e não devem existir viagens com o mesmo id
-/// - transporte é representado pela estrutura *Transporte*
-/// - tempo_previsto e tempo_realizado representam minutos, que uma viagem deve durar e quanto ela realmente durou,
+/// - id deve ser um inteiro maior que 0
+/// - tempo_previsto e tempo_realizado representam minutos que uma viagem deve durar e quanto ela realmente durou,
 /// respectivamente. Ambos devem ser inteiros maiores que 0
-/// - situacação é representado pelo tipo enumerado *Situacao*
 pub opaque type Viagem {
   Viagem(
     id: Int,
@@ -41,8 +28,10 @@ pub opaque type Viagem {
   )
 }
 
-/// Recebe a quantidade de tempo de uma viagem e a classifica em *Adiantado*,
-/// *Pontual*, *Atrasado*, *Cancelado*
+/// Classifica uma viagem como:
+/// Atrasada: caso *tempo_previsto* for menor que *tempo_realizado*
+/// Pontual: caso *tempo_previsto* for igual a *tempo_realizado*
+/// Adiantada: caso *tempo_previsto* for maior que *tempo_realizado*
 pub fn classifica_tempo(
   tempo_previsto: Int,
   tempo_realizado: Int,
@@ -57,17 +46,22 @@ pub fn classifica_tempo(
   }
 }
 
+/// Indica o transporte que deverá ser utilizado em uma viagem, sendo:
+/// Van: caso a *qtd_passageitos* seja menor ou igual a 20
+/// Onibus: caso a *qtd_passageiros* seja maior que 30
+/// MicroOnibus: caso a *qtd_passageiros* seja maior que 20 e menor ou igual a 30
 pub fn classifica_transporte(qtd_passageiros: Int) -> Transporte {
   case qtd_passageiros <= 20 {
     True -> Van
-    False -> case qtd_passageiros >= 40 {
+    False -> case qtd_passageiros > 30 {
       True -> Onibus
       False -> MicroOnibus
     }
   }
 }
-/// Retorna ok(Viagem) se *id*, *tempo_previso* e *tempo_realizado* forem maiores que 0. Error(Nil) caso contrário.
-/// Quanto aos paramentros *transporte*, *situação* não ha validações a serem realizadas.
+
+/// Retorna ok(Viagem) com um *nome* mas se *id*, *qtd_passageiros*, *tempo_previso* e *tempo_realizado*forem maiores que 0.
+/// Error(Nil) caso contrário.
 pub fn cria_viagem(
   id: Int,
   nome: String,
@@ -110,10 +104,12 @@ pub fn mostra_situacao(viagem: Viagem) {
   viagem.situacao
 }
 
+/// Devolve o valor do nome de uma *viagem*
 pub fn mostra_nome(viagem: Viagem) {
   viagem.nome
 }
 
+/// Devolve o valor da qtd_passageiros de uma *viagem*
 pub fn mostra_qtd_passageiros(viagem: Viagem) {
   viagem.qtd_passageiros
 }
@@ -125,7 +121,7 @@ pub type Linha {
 
 /// Representa uma região com uma listagem das linhas de transporte
 pub type Regiao {
-  Regiao(regiao: RegiaoCidade, sub_regioes: List(Regiao), linhas: List(Linha))
+  Regiao(nome: String, sub_regioes: List(Regiao), linhas: List(Linha))
 }
 
 /// Representa uma cidade com um nome próprio e uma listagem das regiões que existem nessa cidade

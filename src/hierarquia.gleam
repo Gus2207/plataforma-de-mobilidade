@@ -11,7 +11,7 @@ import tipos.{
 
 /// AQUI EXCLUSIVO PARA ABRIGAR A MANUPULAÇÃO DA HIERARQUIA F9
 
-/// Funcao recursiva que processa de forma hierquica todas as linhas da cidade
+/// Funcao recursiva que processa de forma hierarquica todas as linhas da cidade
 /// que são de onibus, devolvendo no fim a quantidade de viagens de onibus
 pub fn busca_viagens_onibus(cidade: Cidade) -> Int {
   case cidade.regioes {
@@ -27,13 +27,13 @@ pub fn busca_viagens_onibus(cidade: Cidade) -> Int {
 // fazer a chamada da funcao que percorre as linhas de uma regiao e a chamada
 
 ///da funcao que percorre as subregioes
-pub fn percorre_regiao(regioes: Regiao) -> Int {
-  case regioes.linhas {
-    [] -> percorre_sub_regioes(regioes.sub_regioes)
+pub fn percorre_regiao(regiao: Regiao) -> Int {
+  case regiao.linhas {
+    [] -> percorre_sub_regioes(regiao.sub_regioes)
     [primeiro, ..resto] -> {
       let resultado = percorre_linhas(primeiro)
       resultado
-      + percorre_regiao(Regiao(regioes.regiao, regioes.sub_regioes, resto))
+      + percorre_regiao(Regiao(regiao.nome, regiao.sub_regioes, resto))
     }
   }
 }
@@ -69,15 +69,15 @@ pub fn percorre_linhas(linhas: Linha) -> Int {
 /// Pega a hierarquia mais alta (*Cidade*) e percorre suas regioes, além de
 /// fazer a chamada da funcao que percorre as linhas de uma regiao e a chamada
 ///da funcao que percorre as subregioes
-pub fn percorre_regiao_totais(regioes: Regiao) -> Int {
-  case regioes.linhas {
-    [] -> percorre_sub_regioes_totais(regioes.sub_regioes)
+pub fn percorre_regiao_totais(regiao: Regiao) -> Int {
+  case regiao.linhas {
+    [] -> percorre_sub_regioes_totais(regiao.sub_regioes)
     [primeiro, ..resto] -> {
       let resultado = percorre_linhas_totais(primeiro)
       resultado
       + percorre_regiao_totais(Regiao(
-        regioes.regiao,
-        regioes.sub_regioes,
+        regiao.regiao,
+        regiao.sub_regioes,
         resto,
       ))
     }

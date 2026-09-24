@@ -1,6 +1,6 @@
-# Plataforma de mobilidade - Gleam
-## Contexto
-Registros de viagens, linhas e atrasos de transporte.
+# Plataforma de mobilidade
+## Tema
+Mobilidade Urbana e Transporte Coletivo
 ## Dados mínimos sugeridos
 id, linha, passageiros, tempo previsto, tempo realizado, situação.
 ## Tipos soma sugeridos
@@ -12,6 +12,10 @@ atraso médio; linha mais atrasada; total de passageiros; viagens críticas;
 regularidade por região.
 
 ### checklist do que deve ser feito no trabalho
+
+tema, integrantes, breve descrição do sistema, tipos criados, relação entre
+as funcionalidades F1–F10 e as funções que as implementam, além das instruções para execução
+dos testes.
 
  ### Checklist do que deve ser feito
  
@@ -49,25 +53,25 @@ regularidade por região.
    * **Sugestão Tema 9:** Calcular a média do tempo realizado das viagens de um linha.
      * **O que foi feito** (1) Calcular quantas viagens uma Linha possui (2) Realizar a soma do tempo total de viagens realizadas em uma linha (3) calcular a média realizando soma/quantidade
  
- - [ ] **F9 – Processamento hierárquico**
+ - [x] **F9 – Processamento hierárquico**
    * **O que fazer:** Implementar **duas funções recursivas** que processem a sua estrutura em árvore (Cidade -> Região -> Linha -> Viagens).
    * **Sugestões Tema 9:** 
      * *Função 1:* Soma o total de passageiros do município inteiro (descendo a recursão de Cidade até as Viagens).
      * *Função 2:* Vasculha o município inteiro e devolve uma única lista com todas as viagens Críticas/Atrasadas de todas as regiões combinadas.
  
- - [ ] **F10 – Relatório textual**
+ - [x] **F10 – Relatório textual**
    * **O que fazer:** Produzir uma `String` juntando textos e pelo menos três resultados de cálculos feitos pelas funções anteriores.
    * **Sugestão Tema 9:** Retornar uma string formatada: *"Relatório da Cidade: O sistema processou um total de [X] passageiros. A viagem com pior atraso foi a de ID [Y]. Detectamos [Z] viagens críticas hoje."* (Use `int.to_string` para converter os números para texto).
 
  ## CheckList final: 
 
 - [x] **Escolhemos um dos 10 temas e informamos a escolha conforme solicitado.**
-- [ ] **Implementamos as funcionalidades F1–F10.**
+- [x] **Implementamos as funcionalidades F1–F10.**
 - [x] **Criamos pelo menos 2 tipos soma e 1 tipo autorreferente.**
-- [ ] **Implementamos pelo menos 5 funções recursivas, sendo pelo menos 3 estruturais.**
-- [ ] **Não substituímos as recursões obrigatórias por funções de alta ordem.**
+- [x] **Implementamos pelo menos 5 funções recursivas, sendo pelo menos 3 estruturais.**
+- [x] **Não substituímos as recursões obrigatórias por funções de alta ordem.**
 - [x] **Incluímos pelo menos 3 validações específicas do tema.**
 - [ ] **Testamos casos típicos, limites e casos de ausência/erro.**
 - [ ] **Documentamos a função que utiliza um plano de solução.**
 - [ ] **O README permite identificar claramente onde cada requisito foi implementado.**
-- [ ] **Todos os integrantes conseguem explicar o modelo de dados e as principais funções.**
+- [x] **Todos os integrantes conseguem explicar o modelo de dados e as principais funções.**
