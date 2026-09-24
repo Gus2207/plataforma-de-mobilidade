@@ -11,7 +11,7 @@ import tipos.{
 
 /// AQUI EXCLUSIVO PARA ABRIGAR A MANUPULAÇÃO DA HIERARQUIA F9
 
-/// Funcao recursiva que processa de forma hierrquica todas as linhas da cidade
+/// Funcao recursiva que processa de forma hierquica todas as linhas da cidade
 /// que são de onibus, devolvendo no fim a quantidade de viagens de onibus
 pub fn busca_viagens_onibus(cidade: Cidade) -> Int {
   case cidade.regioes {
@@ -29,12 +29,11 @@ pub fn busca_viagens_onibus(cidade: Cidade) -> Int {
 ///da funcao que percorre as subregioes
 pub fn percorre_regiao(regioes: Regiao) -> Int {
   case regioes.linhas {
-    [] -> 0
+    [] -> percorre_sub_regioes(regioes.sub_regioes)
     [primeiro, ..resto] -> {
       let resultado = percorre_linhas(primeiro)
       resultado
       + percorre_regiao(Regiao(regioes.regiao, regioes.sub_regioes, resto))
-      + percorre_sub_regioes(regioes.sub_regioes)
     }
   }
 }
@@ -43,11 +42,10 @@ pub fn percorre_regiao(regioes: Regiao) -> Int {
 ///regiao) e chama a percorre_regiao para percorrer a regiao dessa lista
 pub fn percorre_sub_regioes(subregioes: List(Regiao)) -> Int {
   case subregioes {
-    [] -> 0
+    [] -> percorre_sub_regioes(resto)
     [primeiro, ..resto] -> {
       let resultado = percorre_regiao(primeiro)
-
-      resultado + percorre_sub_regioes(resto)
+      resultado + percorre_regiao(resto)
     }
   }
 }
@@ -62,7 +60,7 @@ pub fn percorre_linhas(linhas: Linha) -> Int {
 
       case transporte == Onibus {
         True -> 1 + percorre_linhas(Linha(linhas.nome, resto))
-        False -> 0 + percorre_linhas(Linha(linhas.nome, resto))
+        False -> percorre_linhas(Linha(linhas.nome, resto))
       }
     }
   }
@@ -73,7 +71,7 @@ pub fn percorre_linhas(linhas: Linha) -> Int {
 ///da funcao que percorre as subregioes
 pub fn percorre_regiao_totais(regioes: Regiao) -> Int {
   case regioes.linhas {
-    [] -> 0
+    [] -> percorre_sub_regioes_totais(regioes.sub_regioes)
     [primeiro, ..resto] -> {
       let resultado = percorre_linhas_totais(primeiro)
       resultado
@@ -82,7 +80,6 @@ pub fn percorre_regiao_totais(regioes: Regiao) -> Int {
         regioes.sub_regioes,
         resto,
       ))
-      + percorre_sub_regioes_totais(regioes.sub_regioes)
     }
   }
 }
@@ -91,11 +88,10 @@ pub fn percorre_regiao_totais(regioes: Regiao) -> Int {
 ///regiao) e chama a percorre_regiao para percorrer a regiao dessa lista
 pub fn percorre_sub_regioes_totais(subregioes: List(Regiao)) -> Int {
   case subregioes {
-    [] -> 0
+    [] -> percorre_sub_regioes_totais(resto)
     [primeiro, ..resto] -> {
       let resultado = percorre_regiao_totais(primeiro)
-
-      resultado + percorre_sub_regioes_totais(resto)
+      resultado + percorre_regiao_totais(resto)
     }
   }
 }
