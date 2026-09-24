@@ -1,6 +1,4 @@
 /// AQUI EXCLUSIVO PARA ABRIGAR A MANUPULAÇÃO DA HIERARQUIA F9
-/// Contar quantas viagens do municipio estão atrasadas
-/// AQUI EXCLUSIVO PARA ABRIGAR A MANUPULAÇÃO DA HIERARQUIA F9
 
 /// Funcao recursiva que processa de forma hierrquica todas as linhas da cidade
 /// que são de onibus, devolvendo no fim a quantidade de viagens de onibus

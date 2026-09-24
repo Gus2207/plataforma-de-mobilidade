@@ -23,15 +23,6 @@ pub type Transporte {
   Onibus
 }
 
-/// Retorna a quantidade máxima de passageiros de um *trasporte*
-pub fn capacidade_maxima(transporte: Transporte) -> Int {
-  case transporte {
-    Van -> 20
-    MicroOnibus -> 30
-    Onibus -> 45
-  }
-}
-
 /// Representa uma viagem que foi realizada, onde:
 /// - id deve ser um inteiro maior que 0 e não devem existir viagens com o mesmo id
 /// - transporte é representado pela estrutura *Transporte*
@@ -41,7 +32,9 @@ pub fn capacidade_maxima(transporte: Transporte) -> Int {
 pub opaque type Viagem {
   Viagem(
     id: Int,
+    nome: String,
     transporte: Transporte,
+    qtd_passageiros: Int,
     tempo_previsto: Int,
     tempo_realizado: Int,
     situacao: Situacao,
@@ -64,18 +57,29 @@ pub fn classifica_tempo(
   }
 }
 
+pub fn classifica_transporte(qtd_passageiros: Int) -> Transporte {
+  case qtd_passageiros <= 20 {
+    True -> Van
+    False -> case qtd_passageiros >= 40 {
+      True -> Onibus
+      False -> MicroOnibus
+    }
+  }
+}
 /// Retorna ok(Viagem) se *id*, *tempo_previso* e *tempo_realizado* forem maiores que 0. Error(Nil) caso contrário.
 /// Quanto aos paramentros *transporte*, *situação* não ha validações a serem realizadas.
 pub fn cria_viagem(
   id: Int,
-  transporte: Transporte,
+  nome: String,
+  qtd_passageiros: Int,
   tempo_previsto: Int,
   tempo_realizado: Int,
 ) -> Result(Viagem, Nil) {
-  case id > 0 && tempo_previsto > 0 && tempo_realizado > 0{
+  case id > 0 && tempo_previsto > 0 && tempo_realizado > 0 && qtd_passageiros > 0{
     True -> {
       let situacao = classifica_tempo(tempo_previsto, tempo_realizado)
-      Ok(Viagem(id, transporte, tempo_previsto, tempo_realizado, situacao))
+      let transporte = classifica_transporte(qtd_passageiros)
+      Ok(Viagem(id, nome, transporte, qtd_passageiros, tempo_previsto, tempo_realizado, situacao))
     }
     False -> Error(Nil)
   }
@@ -104,6 +108,14 @@ pub fn mostra_tempo_realizado(viagem: Viagem) {
 /// Devolve o valor da situacao de uma *viagem*
 pub fn mostra_situacao(viagem: Viagem) {
   viagem.situacao
+}
+
+pub fn mostra_nome(viagem: Viagem) {
+  viagem.nome
+}
+
+pub fn mostra_qtd_passageiros(viagem: Viagem) {
+  viagem.qtd_passageiros
 }
 
 /// Representa uma linha, que possui um nome especifico e uma listagem das viagens que foram realizadas nessa linha
