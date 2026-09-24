@@ -1,3 +1,5 @@
+import gleam/option.{type Option, Some, None}
+
 import tipos.{
   type Linha,
   type Viagem,
@@ -10,7 +12,6 @@ import tipos.{
   mostra_tempo_realizado
 }
 
-/// COLOCAR AQUI AS FUNÇÕES QUE MANUPULAM AS LISTAS DIRETAMENTE (F3 até F7)
 /// Verifica quantas viagens foram realizadas em uma *linha* especifica
 pub fn conta_elementos(linha: Linha) -> Int {
   case linha.viagens {
