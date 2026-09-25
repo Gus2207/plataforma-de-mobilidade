@@ -23,7 +23,7 @@ pub fn soma_tempo_realizado(linha: Linha) -> Int{
 
 /// Calcula a media do tempo realizado das viagens de uma linha
 pub fn media_tempo(linha: Linha) -> Float {
-  let qtd_viagens = int.to_float(conta_elementos(linha))
+  let qtd_viagens = int.to_float(conta_elementos(linha.viagens))
   let soma_tempo_realizado = int.to_float(soma_tempo_realizado(linha))
 
   case qtd_viagens == 0.0 {
@@ -35,7 +35,7 @@ pub fn media_tempo(linha: Linha) -> Float {
 /// Informa o tempo médio de viagens de uma linha, qual a viagem mais adiantada
 /// e o total de viagens realizadas por aquela linha.
 pub fn informacoes_linha(linha: Linha) -> String {
-  let total_viagens = conta_elementos(linha)
+  let total_viagens = conta_elementos(linha.viagens)
 
   case total_viagens == 0{
     True -> "A linha " <> linha.nome <> " não realizou nenhuma viagem até o presente momento."

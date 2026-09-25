@@ -69,7 +69,7 @@ pub fn cria_viagem(
   tempo_previsto: Int,
   tempo_realizado: Int,
 ) -> Result(Viagem, Nil) {
-  case id > 0 && tempo_previsto > 0 && tempo_realizado > 0 && qtd_passageiros > 0{
+  case id > 0 && tempo_previsto > 0 && tempo_realizado > 0 && qtd_passageiros > 0 && qtd_passageiros <= 40{
     True -> {
       let situacao = classifica_tempo(tempo_previsto, tempo_realizado)
       let transporte = classifica_transporte(qtd_passageiros)
